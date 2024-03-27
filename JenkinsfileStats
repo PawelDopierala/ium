@@ -23,9 +23,15 @@ pipeline {
                 copyArtifacts fingerprintArtifacts: true, projectName: 'z-s495719-create-dataset', selector: buildParameter('BUILD_SELECTOR')
             }
         }
+        stage('Script') {
+            steps {
+                sh 'chmod 777 ./data_stats.sh'
+                sh "./data_stats.sh"
+            }
+        }
         stage('Artifacts') {
             steps {
-                archiveArtifacts artifacts: 'data_stats.txt'
+                archiveArtifacts artifacts: 'stats.txt'
             }
         }
     }
