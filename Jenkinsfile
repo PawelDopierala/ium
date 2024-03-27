@@ -13,6 +13,11 @@ pipeline {
             description: 'Kaggle token taken from kaggle.json file, as described in https://github.com/Kaggle/kaggle-api#api-credentials',
             name: 'KAGGLE_KEY'
         )
+        string(
+            defaultValue: '50',
+            description: 'number of truncated examples',
+            name: 'CUTOFF'
+        )
     }
 
     stages {
@@ -27,7 +32,7 @@ pipeline {
         stage('Shell') {
             steps {
                 sh 'chmod 777 ./data_processing.sh'
-                sh './data_processing.sh'
+                sh './data_processing.sh ${params.CUTOFF}'
             }
         }
         stage('Artifacts') {
