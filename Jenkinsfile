@@ -32,7 +32,7 @@ pipeline {
         stage('Shell') {
             steps {
                 sh 'chmod 777 ./data_processing.sh'
-                sh './data_processing.sh ${params.CUTOFF}'
+                sh "./data_processing.sh ${params.CUTOFF}"
             }
         }
         stage('Artifacts') {
