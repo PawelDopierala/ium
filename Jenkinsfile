@@ -29,24 +29,18 @@ pipeline {
                 )
             }
         }
-        stage('Shell') {
+        stage('Download data') {
             steps {
-                sh 'chmod 777 ./data_processing.sh'
-                sh "./data_processing.sh ${params.CUTOFF}"
+                withEnv(["KAGGLE_USERNAME=${params.KAGGLE_USERNAME}",
+                  "KAGGLE_KEY=${params.KAGGLE_KEY}" ]) {
+                    sh 'chmod 777 ./data_processing.sh'
+                    sh "./data_processing.sh ${params.CUTOFF}"
+                }
             }
         }
         stage('Artifacts') {
             steps {
                 archiveArtifacts artifacts: 'processed_data.txt'
-            }
-        }
-        stage('Kaggle') {
-            steps {
-                withEnv(["KAGGLE_USERNAME=${params.KAGGLE_USERNAME}",
-                  "KAGGLE_KEY=${params.KAGGLE_KEY}" ]) {
-                    sh 'echo KAGGLE_USERNAME: $KAGGLE_USERNAME'
-                    sh 'kaggle datasets list'
-                }
             }
         }
     }
