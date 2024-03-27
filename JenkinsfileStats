@@ -18,7 +18,7 @@ pipeline {
                 )
             }
         }
-        stage('Download data') {
+        stage('Stats') {
             steps {
                 copyArtifacts fingerprintArtifacts: true, projectName: 'z-s495719-create-dataset', selector: buildParameter('BUILD_SELECTOR')
             }
