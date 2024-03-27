@@ -7,7 +7,7 @@ pipeline {
             description: 'Kaggle username',
             name: 'KAGGLE_USERNAME',
             trim: false
-        ),
+        )
         password(
             defaultValue: '',
             description: 'Kaggle token taken from kaggle.json file, as described in https://github.com/Kaggle/kaggle-api#api-credentials',
