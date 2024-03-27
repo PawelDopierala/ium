@@ -10,7 +10,7 @@ pipeline {
                 )
                 sh 'chmod 777 ./data_processing.sh'
                 sh './data_processing.sh'
-                archiveArtifacts artifacts: './*'
+                archiveArtifacts artifacts: 'processed_data.txt'
             }
         }
     }
