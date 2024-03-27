@@ -36,10 +36,12 @@ pipeline {
             }
         }
         stage('Kaggle') {
-            withEnv(["KAGGLE_USERNAME=${params.KAGGLE_USERNAME}",
-              "KAGGLE_KEY=${params.KAGGLE_KEY}" ]) {
-                sh 'echo KAGGLE_USERNAME: $KAGGLE_USERNAME'
-                sh 'kaggle datasets list'
+            steps {
+                withEnv(["KAGGLE_USERNAME=${params.KAGGLE_USERNAME}",
+                  "KAGGLE_KEY=${params.KAGGLE_KEY}" ]) {
+                    sh 'echo KAGGLE_USERNAME: $KAGGLE_USERNAME'
+                    sh 'kaggle datasets list'
+                }
             }
         }
     }
