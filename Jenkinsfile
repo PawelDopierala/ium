@@ -1,6 +1,20 @@
 pipeline {
     agent any
 
+    parameters {
+        string(
+            defaultValue: '',
+            description: 'Kaggle username',
+            name: 'KAGGLE_USERNAME',
+            trim: false
+        ),
+        password(
+            defaultValue: '',
+            description: 'Kaggle token taken from kaggle.json file, as described in https://github.com/Kaggle/kaggle-api#api-credentials',
+            name: 'KAGGLE_KEY'
+        )
+    }
+
     stages {
         stage('Git') {
             steps {
@@ -19,6 +33,13 @@ pipeline {
         stage('Artifacts') {
             steps {
                 archiveArtifacts artifacts: 'processed_data.txt'
+            }
+        }
+        stage('Kaggle') {
+            withEnv(["KAGGLE_USERNAME=${params.KAGGLE_USERNAME}",
+              "KAGGLE_KEY=${params.KAGGLE_KEY}" ]) {
+                sh 'echo KAGGLE_USERNAME: $KAGGLE_USERNAME'
+                sh 'kaggle datasets list'
             }
         }
     }
