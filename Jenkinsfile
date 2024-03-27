@@ -40,7 +40,7 @@ pipeline {
         }
         stage('Artifacts') {
             steps {
-                archiveArtifacts artifacts: 'data_stats.txt'
+                archiveArtifacts artifacts: 'processed_data.txt'
             }
         }
     }
