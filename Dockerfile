@@ -1,11 +1,8 @@
 FROM ubuntu:latest
 
 RUN apt-get update && \
-    apt-get install -y python3-pip
-
-RUN pip3 install --user kaggle pandas scikit-learn
-
-ENV PATH="/root/.local/bin:${PATH}"
+    apt-get install -y python3-pip && \
+    pip3 install kaggle pandas scikit-learn
 
 COPY data_processing.sh .
 
