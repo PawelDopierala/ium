@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 import subprocess
 
-# subprocess.run(["kaggle", "datasets", "download", "muhammadbinimran/housing-price-prediction-data", "--unzip"])
+subprocess.run(["kaggle", "datasets", "download", "muhammadbinimran/housing-price-prediction-data", "--unzip"])
 housing_price_dataset = pd.read_csv('housing_price_dataset.csv')
 
 hp_train_test, hp_dev = sklearn.model_selection.train_test_split(housing_price_dataset, test_size=0.1)
