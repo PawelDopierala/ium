@@ -1,8 +1,8 @@
-import sklearn
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
+import subprocess
 
+subprocess.run(["kaggle", "datasets", "download", "muhammadbinimran/housing-price-prediction-data", "--unzip"])
 housing_price_dataset = pd.read_csv('housing_price_dataset.csv')
 
 hp_train_test, hp_dev = train_test_split(housing_price_dataset, test_size=0.1)
