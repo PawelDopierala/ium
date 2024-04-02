@@ -42,7 +42,7 @@ pipeline {
         }
         stage('Artifacts') {
             steps {
-                def artifactsList = ['hp_train.csv', 'hp_dev.csv', 'hp_test.csv'']
+                def artifactsList = ['hp_train.csv', 'hp_dev.csv', 'hp_test.csv']
                 artifactsList.each { artifact ->
                     archiveArtifacts artifacts: artifact
                 }
