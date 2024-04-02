@@ -35,19 +35,13 @@ pipeline {
             steps {
                 withEnv(["KAGGLE_USERNAME=${params.KAGGLE_USERNAME}",
                   "KAGGLE_KEY=${params.KAGGLE_KEY}" ]) {
-                    sh 'chmod 777 data_processing.py'
                     sh 'python data_processing.py'
                 }
             }
         }
         stage('Artifacts') {
             steps {
-                script {
-                    def artifactsList = ['hp_train.csv', 'hp_dev.csv', 'hp_test.csv']
-                    artifactsList.each { artifact ->
-                        archiveArtifacts artifacts: artifact
-                    }
-                }
+                archiveArtifacts artifacts: 'hp_train.csv,hp_dev.csv,hp_test.csv'
             }
         }
     }
