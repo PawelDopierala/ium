@@ -1,6 +1,6 @@
-import sklearn
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.model_selection import train_test_split
+import scikit-learn as sklearn
+from scikit-learn.preprocessing import OneHotEncoder
+from scikit-learn.model_selection import train_test_split
 import pandas as pd
 import subprocess
 
