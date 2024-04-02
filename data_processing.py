@@ -1,6 +1,4 @@
 import sklearn
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.model_selection import train_test_split
 import pandas as pd
 
 housing_price_dataset = pd.read_csv('housing_price_dataset.csv')
