@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'paweldopierala/ium:latest' }
+    }
 
     parameters{
         buildSelector(

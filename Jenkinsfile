@@ -31,7 +31,7 @@ pipeline {
                 )
             }
         }
-        stage('Download data') {
+        stage('Script') {
             steps {
                 withEnv(["KAGGLE_USERNAME=${params.KAGGLE_USERNAME}",
                   "KAGGLE_KEY=${params.KAGGLE_KEY}" ]) {
