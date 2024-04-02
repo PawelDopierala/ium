@@ -3,7 +3,7 @@ FROM ubuntu:latest
 RUN apt-get update && \
     apt-get install -y python3-pip
 
-RUN pip3 install --user kaggle pandas scikit-learn
+RUN pip3 install --user kaggle pandas aaa
 
 ENV PATH="/root/.local/bin:${PATH}"
 
