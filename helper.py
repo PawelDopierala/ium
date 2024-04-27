@@ -1,5 +1,6 @@
 import tensorflow as tf
 
+
 def prepare_tensors(df):
     Y = df["Price"]
     X = df.drop("Price", axis=1)

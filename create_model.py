@@ -25,5 +25,3 @@ model.compile(optimizer=adam, loss='mean_squared_error')
 model.fit(X_train, Y_train, epochs=20, batch_size=32, validation_data=(X_dev, Y_dev))
 
 model.save('hp_model.h5')
-
-

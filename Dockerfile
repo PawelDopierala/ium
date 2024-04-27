@@ -10,4 +10,9 @@ RUN mkdir -p /.kaggle && chown -R jenkins /.kaggle
 
 USER jenkins
 
+COPY data_processing.py .
+COPY create_model.py .
+COPY helper.py .
+COPY predict_price.py .
+
 WORKDIR .
