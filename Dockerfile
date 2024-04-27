@@ -2,14 +2,12 @@ FROM ubuntu:latest
 
 RUN apt-get update && \
     apt-get install -y python3-pip && \
-    pip3 install kaggle pandas scikit-learn
+    pip3 install kaggle pandas scikit-learn tensorflow
 
 RUN useradd -ms /bin/bash jenkins
 
 RUN mkdir -p /.kaggle && chown -R jenkins /.kaggle
 
 USER jenkins
-
-COPY data_processing.sh .
 
 WORKDIR .
