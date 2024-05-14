@@ -1,0 +1,46 @@
+pipeline {
+    agent {
+        dockerfile true
+    }
+
+    parameters{
+        buildSelector(
+            defaultSelector: lastSuccessful(),
+            description: 'Which build to use for copying artifacts',
+            name: 'BUILD_SELECTOR'
+        )
+    }
+
+    triggers {
+        upstream(upstreamProjects: 's495719-training', threshold: hudson.model.Result.SUCCESS)
+    }
+
+    stages {
+        stage('Git') {
+            steps {
+                git(
+                    url: "https://git.wmi.amu.edu.pl/s495719/ium_495719.git",
+                    branch: "main"
+                )
+            }
+        }
+        stage('CopyArtifacts') {
+            steps {
+                copyArtifacts fingerprintArtifacts: true, projectName: 's495719-create-dataset', selector: buildParameter('BUILD_SELECTOR')
+                copyArtifacts fingerprintArtifacts: true, projectName: 's495719-training', selector: buildParameter('BUILD_SELECTOR')
+                copyArtifacts fingerprintArtifacts: true, projectName: 's495719-evaluation', selector: buildParameter('BUILD_SELECTOR'), optional: true
+            }
+        }
+        stage('Script') {
+            steps {
+                sh 'chmod 777 ./evaluate.py'
+                sh "python3 ./evaluate.py ${currentBuild.number}"
+            }
+        }
+        stage('CreateArtifacts') {
+            steps {
+                archiveArtifacts artifacts: 'hp_test_predictions.csv,hp_test_metrics.csv'
+            }
+        }
+    }
+}
