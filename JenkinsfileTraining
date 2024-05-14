@@ -10,7 +10,7 @@ pipeline {
             name: 'BUILD_SELECTOR'
         )
         string(
-            defaultValue: '5',
+            defaultValue: '20',
             description: 'Epochs',
             name: 'EPOCHS'
         )
