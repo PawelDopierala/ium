@@ -26,7 +26,7 @@ pipeline {
         }
         stage('CopyArtifacts') {
             steps {
-                copyArtifacts fingerprintArtifacts: true, projectName: 's495719-create-dataset', selector: buildParameter('BUILD_SELECTOR')
+                copyArtifacts fingerprintArtifacts: true, projectName: 'z-s495719-create-dataset', selector: buildParameter('BUILD_SELECTOR')
                 copyArtifacts fingerprintArtifacts: true, projectName: 's495719-training', selector: buildParameter('BUILD_SELECTOR')
                 copyArtifacts fingerprintArtifacts: true, projectName: 's495719-evaluation', selector: buildParameter('BUILD_SELECTOR'), optional: true
             }
