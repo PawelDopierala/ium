@@ -6,11 +6,10 @@ pipeline {
     parameters{
         buildSelector(
             defaultSelector: lastSuccessful(),
-            description: 'Which build to use for copying artifacts',
+            description: 'Which build to use for copying artifacts ',
             name: 'BUILD_SELECTOR'
         )
         gitParameter(
-            branch: '',
             branchFilter: '.*',
             defaultValue: 'main',
             name: 'TRAINING_BRANCH',
@@ -35,7 +34,7 @@ pipeline {
         stage('CopyArtifacts') {
             steps {
                 copyArtifacts fingerprintArtifacts: true, projectName: 'z-s495719-create-dataset', selector: buildParameter('BUILD_SELECTOR')
-                copyArtifacts fingerprintArtifacts: true, projectName: 's495719-training/' + params.TRAINING_BRANCH, selector: buildParameter('BUILD_SELECTOR')
+                copyArtifacts fingerprintArtifacts: true, projectName: 's495719-training/main', selector: buildParameter('BUILD_SELECTOR')
                 copyArtifacts fingerprintArtifacts: true, projectName: 's495719-evaluation/main', selector: buildParameter('BUILD_SELECTOR'), optional: true
             }
         }
