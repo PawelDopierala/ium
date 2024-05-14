@@ -1,0 +1,40 @@
+pipeline {
+    agent {
+        docker { image 'paweldopierala/ium:1.0.0' }
+    }
+
+    parameters{
+        buildSelector(
+            defaultSelector: lastSuccessful(),
+            description: 'Which build to use for copying artifacts',
+            name: 'BUILD_SELECTOR'
+        )
+    }
+
+    stages {
+        stage('Git') {
+            steps {
+                git(
+                    url: "https://git.wmi.amu.edu.pl/s495719/ium_495719.git",
+                    branch: "main"
+                )
+            }
+        }
+        stage('CopyArtifacts') {
+            steps {
+                copyArtifacts fingerprintArtifacts: true, projectName: 'z-s495719-create-dataset', selector: buildParameter('BUILD_SELECTOR')
+            }
+        }
+        stage('Script') {
+            steps {
+                sh 'chmod 777 ./create_model.py'
+                sh "python3 ./create_model.py"
+            }
+        }
+        stage('CreateArtifacts') {
+            steps {
+                archiveArtifacts artifacts: 'hp_model.h5'
+            }
+        }
+    }
+}
