@@ -11,6 +11,10 @@ pipeline {
         )
     }
 
+    triggers {
+        upstream(upstreamProjects: 's495719-create-dataset', threshold: hudson.model.Result.SUCCESS)
+    }
+
     stages {
         stage('Git') {
             steps {
