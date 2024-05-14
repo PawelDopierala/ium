@@ -9,6 +9,11 @@ pipeline {
             description: 'Which build to use for copying artifacts',
             name: 'BUILD_SELECTOR'
         )
+        string(
+            defaultValue: '5',
+            description: 'Epochs',
+            name: 'EPOCHS'
+        )
     }
 
     triggers {
@@ -32,7 +37,7 @@ pipeline {
         stage('Script') {
             steps {
                 sh 'chmod 777 ./create_model.py'
-                sh "python3 ./create_model.py"
+                sh "python3 ./create_model.py ${params.EPOCHS}"
             }
         }
         stage('CreateArtifacts') {

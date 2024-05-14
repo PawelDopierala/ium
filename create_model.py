@@ -1,10 +1,13 @@
 import pandas as pd
+import sys
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import Adam
 from keras import regularizers
 
 from helper import prepare_tensors
+
+epochs = int(sys.argv[1])
 
 hp_train = pd.read_csv('hp_train.csv')
 hp_dev = pd.read_csv('hp_dev.csv')
@@ -22,6 +25,6 @@ model.add(Dense(1, activation='linear'))
 adam = Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-7)
 model.compile(optimizer=adam, loss='mean_squared_error')
 
-model.fit(X_train, Y_train, epochs=20, batch_size=32, validation_data=(X_dev, Y_dev))
+model.fit(X_train, Y_train, epochs=epochs, batch_size=32, validation_data=(X_dev, Y_dev))
 
 model.save('hp_model.h5')
