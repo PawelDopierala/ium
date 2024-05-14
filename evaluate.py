@@ -46,6 +46,6 @@ for metric in metrics:
     plt.xlabel('Build Number')
     plt.ylabel(metric)
     plt.grid(True)
-    plot_file = f'{metric.lower()}_plt.png'
+    plot_file = f'plot_{metric.lower()}.png'
     plt.savefig(plot_file)
     plt.close()
