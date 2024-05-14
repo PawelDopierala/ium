@@ -51,7 +51,7 @@ pipeline {
         }
         stage('CreateArtifacts') {
             steps {
-                archiveArtifacts artifacts: 'hp_test_predictions.csv,hp_test_metrics.csv'
+                archiveArtifacts artifacts: 'hp_test_predictions.csv,hp_test_metrics.csv,metrics_plt.png'
             }
         }
     }

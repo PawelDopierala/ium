@@ -5,6 +5,7 @@ import os
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from keras.models import load_model
 from helper import prepare_tensors
+import matplotlib.pyplot as plt
 
 build_number = int(sys.argv[1])
 
@@ -37,3 +38,18 @@ else:
     updated_metrics_df = metrics_df
 
 updated_metrics_df.to_csv(metrics_file, index=False)
+
+plt.figure(figsize=(10, 6))
+plt.plot(updated_metrics_df['Build_Number'], updated_metrics_df['RMSE'], label='RMSE', marker='o')
+plt.plot(updated_metrics_df['Build_Number'], updated_metrics_df['MAE'], label='MAE', marker='o')
+plt.plot(updated_metrics_df['Build_Number'], updated_metrics_df['R2'], label='R2', marker='o')
+
+plt.title('Metrics vs Builds')
+plt.xlabel('Build Number')
+plt.ylabel('Metric Value')
+plt.legend()
+plt.grid(True)
+
+plot_file = 'metrics_plt.png'
+plt.savefig(plot_file)
+plt.close()

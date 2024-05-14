@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN apt-get update && \
     apt-get install -y python3-pip && \
-    pip3 install kaggle pandas scikit-learn tensorflow
+    pip3 install kaggle pandas scikit-learn tensorflow matplotlib
 
 RUN useradd -ms /bin/bash jenkins
 
@@ -13,6 +13,6 @@ USER jenkins
 COPY data_processing.py .
 COPY create_model.py .
 COPY helper.py .
-COPY predict_price.py .
+COPY evaluate.py .
 
 WORKDIR .
