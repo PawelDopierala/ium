@@ -1,0 +1,13 @@
+name: hp_model_env
+channels:
+  - defaults
+dependencies:
+  - python
+  - pandas
+  - numpy
+  - scikit-learn
+  - matplotlib
+  - tensorflow
+  - keras
+  - mlflow
+  - pip
