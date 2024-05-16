@@ -2,12 +2,17 @@ import pandas as pd
 import numpy as np
 import sys
 import os
+
+import mlflow
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from keras.models import load_model
 from helper import prepare_tensors
 import matplotlib.pyplot as plt
 
-build_number = int(sys.argv[1])
+if len(sys.argv) > 1:
+    build_number = int(sys.argv[1])
+else:
+    build_number = 0
 
 hp_test = pd.read_csv('hp_test.csv')
 X_test, Y_test = prepare_tensors(hp_test)
@@ -49,3 +54,8 @@ for metric in metrics:
     plot_file = f'plot_{metric.lower()}.png'
     plt.savefig(plot_file)
     plt.close()
+
+with mlflow.start_run() as run:
+    mlflow.log_metric('RMSE', rmse)
+    mlflow.log_metric('MAE', mae)
+    mlflow.log_metric('R2', r2)

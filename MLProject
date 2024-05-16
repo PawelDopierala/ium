@@ -1,0 +1,15 @@
+name: HousePriceModel
+
+docker_env:
+  image: paweldopierala/ium:2.0.0
+
+entry_points:
+  main:
+    parameters:
+      epochs: {type: int, default: 20}
+      learning_rate: {type: float, default: 0.001}
+      batch_size: {type: int, default: 20}
+    command: "python train.py {epochs} {learning_rate} {batch_size}"
+
+  test:
+    command: "python test.py"

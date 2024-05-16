@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'paweldopierala/ium:1.0.0' }
+        docker { image 'paweldopierala/ium:2.0.0' }
     }
 
     parameters{

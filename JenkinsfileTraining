@@ -14,6 +14,16 @@ pipeline {
             description: 'Epochs',
             name: 'EPOCHS'
         )
+        string(
+            defaultValue: '0.001',
+            description: 'Learning Rate',
+            name: 'LEARNING_RATE'
+        )
+        string(
+            defaultValue: '32',
+            description: 'Batch size',
+            name: 'BATCH_SIZE'
+        )
     }
 
     triggers {
@@ -37,7 +47,7 @@ pipeline {
         stage('Script') {
             steps {
                 sh 'chmod 777 ./create_model.py'
-                sh "python3 ./create_model.py ${params.EPOCHS}"
+                sh "python3 ./create_model.py ${params.EPOCHS} ${params.LEARNING_RATE} ${params.BATCH_SIZE}"
             }
         }
         stage('CreateArtifacts') {
