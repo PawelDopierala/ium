@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN apt-get update && \
     apt-get install -y python3-pip && \
-    pip3 install kaggle pandas scikit-learn tensorflow matplotlib mlflow
+    pip3 install kaggle pandas scikit-learn tensorflow matplotlib
 
 RUN useradd -ms /bin/bash jenkins
 
