@@ -1,0 +1,6 @@
+create_model:
+  epochs: 20
+  learning_rate: 0.001
+  batch_size: 32
+evaluate:
+  build_number: 0

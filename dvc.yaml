@@ -1,0 +1,38 @@
+stages:
+  data_processing:
+    cmd: python data_processing_dvc.py data/housing_price_dataset.csv
+    deps:
+      - data_processing_dvc.py
+      - data/housing_price_dataset.csv
+    outs:
+      - hp_train.csv
+      - hp_dev.csv
+      - hp_test.csv
+  create_model:
+     cmd: python create_model.py ${create_model.epochs} ${create_model.learning_rate} ${create_model.batch_size}
+     deps:
+       - create_model.py
+       - helper.py
+       - hp_train.csv
+       - hp_dev.csv
+     outs:
+       - hp_model.h5
+     params:
+       - create_model.epochs
+       - create_model.learning_rate
+       - create_model.batch_size
+  evaluate:
+    cmd: python evaluate.py ${evaluate.build_number}
+    deps:
+      - evaluate.py
+      - helper.py
+      - hp_model.h5
+      - hp_test.csv
+    outs:
+      - hp_test_predictions.csv
+      - hp_test_metrics.csv
+      - plot_rmse.png
+      - plot_mae.png
+      - plot_r2.png
+    params:
+      - evaluate.build_number

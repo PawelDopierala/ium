@@ -1,1 +1,10 @@
-/housing_price_dataset.csv
+/data/housing_price_dataset.csv
+/hp_model.h5
+/hp_test_predictions.csv
+/hp_test_metrics.csv
+/plot_rmse.png
+/plot_mae.png
+/plot_r2.png
+/hp_train.csv
+/hp_dev.csv
+/hp_test.csv
