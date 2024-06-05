@@ -35,7 +35,7 @@ jobs:
         pip install pandas scikit-learn tensorflow matplotlib mlflow
 
     - name: Train Model
-      run: python create_model.py ${{ github.event.inputs.epochs }} ${{ github.event.inputs.learning_rate }} ${{ github.event.inputs.batch_size }}
+      run: python ./github_project/create_model.py ${{ github.event.inputs.epochs }} ${{ github.event.inputs.learning_rate }} ${{ github.event.inputs.batch_size }}
 
     - name: Evaluate Model
-      run: python evaluate.py ${{ github.run_number }}
+      run: python ./github_project/evaluate.py ${{ github.run_number }}
