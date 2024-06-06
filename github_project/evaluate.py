@@ -17,7 +17,7 @@ else:
 hp_test = pd.read_csv('./github_project/hp_test.csv')
 X_test, Y_test = prepare_tensors(hp_test)
 
-model = load_model('./github_project/hp_model.h5')
+model = load_model('/home/runner/work/ium/ium/github_project/hp_model.h5')
 
 test_predictions = model.predict(X_test)
 
