@@ -1,4 +1,4 @@
-name: ML Workflow
+name: Housing Price Workflow
 
 on:
   workflow_dispatch:
