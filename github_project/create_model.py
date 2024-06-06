@@ -12,8 +12,8 @@ epochs = int(sys.argv[1])
 learning_rate = float(sys.argv[2])
 batch_size = int(sys.argv[3])
 
-hp_train = pd.read_csv('hp_train.csv')
-hp_dev = pd.read_csv('hp_dev.csv')
+hp_train = pd.read_csv('./github_project/hp_train.csv')
+hp_dev = pd.read_csv('./github_project/hp_dev.csv')
 
 X_train, Y_train = prepare_tensors(hp_train)
 X_dev, Y_dev = prepare_tensors(hp_dev)
@@ -30,7 +30,7 @@ model.compile(optimizer=adam, loss='mean_squared_error')
 
 model.fit(X_train, Y_train, epochs=epochs, batch_size=batch_size, validation_data=(X_dev, Y_dev))
 
-model.save('hp_model.h5')
+model.save('./github_project/hp_model.h5')
 
 with mlflow.start_run() as run:
     mlflow.log_param("epochs", epochs)
