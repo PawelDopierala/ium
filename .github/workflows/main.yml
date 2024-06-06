@@ -37,6 +37,13 @@ jobs:
     - name: Train Model
       run: python ./github_project/create_model.py ${{ github.event.inputs.epochs }} ${{ github.event.inputs.learning_rate }} ${{ github.event.inputs.batch_size }}
 
+    - name: Upload Artefacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: model
+        path: |
+          ./github_project/hp_model.h5
+
   evaluate:
     needs: train
     runs-on: ubuntu-latest
@@ -57,3 +64,15 @@ jobs:
 
     - name: Evaluate Model
       run: python ./github_project/evaluate.py ${{ github.run_number }}
+
+    - name: Upload Artefacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: evaluation-results
+        path: |
+          ./github_project/hp_test_predictions.csv
+          ./github_project/hp_test_metrics.csv
+          plot_mae.png
+          plot_r2.png
+          plot_rmse.png
+
