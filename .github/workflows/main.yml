@@ -17,7 +17,7 @@ on:
         default: 32
 
 jobs:
-  train_and_evaluate:
+  install_dependencies:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,8 +34,34 @@ jobs:
         python -m pip install --upgrade pip
         pip install pandas scikit-learn tensorflow matplotlib mlflow
 
+  train_model:
+    needs: install_dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
     - name: Train Model
       run: python ./github_project/create_model.py ${{ github.event.inputs.epochs }} ${{ github.event.inputs.learning_rate }} ${{ github.event.inputs.batch_size }}
+
+  evaluate_model:
+    needs: install_dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
 
     - name: Evaluate Model
       run: python ./github_project/evaluate.py ${{ github.run_number }}
