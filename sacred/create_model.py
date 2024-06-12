@@ -10,7 +10,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 from helper import prepare_tensors
 
-ex = Experiment('495719')
+ex = Experiment('495719', save_git_info=False)
 
 ex.observers.append(MongoObserver(url='mongodb://admin:IUM_2021@tzietkiewicz.vm.wmi.amu.edu.pl:27017'))
 ex.observers.append(FileStorageObserver('my_runs'))
