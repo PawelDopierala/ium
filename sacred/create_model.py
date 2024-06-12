@@ -55,11 +55,9 @@ def main(epochs, learning_rate, batch_size, _run):
 
     rmse = np.sqrt(mean_squared_error(Y_test, test_predictions))
     mae = mean_absolute_error(Y_test, test_predictions)
-    r2 = r2_score(Y_test, test_predictions)
 
     _run.log_scalar("rmse", rmse)
     _run.log_scalar("mae", mae)
-    _run.log_scalar("r2", r2)
 
 
 if __name__ == '__main__':
