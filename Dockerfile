@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN apt-get update && \
     apt-get install -y python3-pip && \
-    pip3 install kaggle pandas scikit-learn tensorflow matplotlib mlflow sacred pymongo
+    pip3 install kaggle pandas scikit-learn tensorflow matplotlib mlflow sacred pymongo --break-system-packages
 
 RUN useradd -ms /bin/bash jenkins
 
