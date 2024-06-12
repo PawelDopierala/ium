@@ -37,7 +37,7 @@ pipeline {
         }
         stage('CreateArtifacts') {
             steps {
-                archiveArtifacts artifacts: 'sacred/hp_model.h5'
+                archiveArtifacts artifacts: 'hp_model.h5'
             }
         }
     }
