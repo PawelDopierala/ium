@@ -23,9 +23,9 @@ def config():
 
 @ex.main
 def main(epochs, learning_rate, batch_size, _run):
-    with _run.open_resource("../hp_train.csv") as f:
+    with _run.open_resource("hp_train.csv") as f:
         hp_train = pd.read_csv(f)
-    with _run.open_resource("../hp_dev.csv") as f:
+    with _run.open_resource("hp_dev.csv") as f:
         hp_dev = pd.read_csv(f)
 
     X_train, Y_train = prepare_tensors(hp_train)
@@ -46,7 +46,7 @@ def main(epochs, learning_rate, batch_size, _run):
     model.save('hp_model.h5')
     ex.add_artifact("hp_model.h5")
 
-    with _run.open_resource("../hp_test.csv") as f:
+    with _run.open_resource("hp_test.csv") as f:
         hp_test = pd.read_csv(f)
 
     X_test, Y_test = prepare_tensors(hp_test)
