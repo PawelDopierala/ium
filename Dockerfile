@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN apt-get update && \
     apt-get install -y python3-pip && \
-    pip3 install pandas scikit-learn tensorflow sacred pymongo --break-system-packages
+    pip3 install pandas scikit-learn tensorflow sacred pymongo --break-system-packages git
 
 RUN useradd -ms /bin/bash jenkins
 
