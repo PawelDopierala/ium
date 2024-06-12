@@ -53,9 +53,6 @@ def main(epochs, learning_rate, batch_size, _run):
 
     test_predictions = model.predict(X_test)
 
-    predictions_df = pd.DataFrame(test_predictions, columns=["Predicted_Price"])
-    predictions_df.to_csv('hp_test_predictions.csv', index=False)
-
     rmse = np.sqrt(mean_squared_error(Y_test, test_predictions))
     mae = mean_absolute_error(Y_test, test_predictions)
     r2 = r2_score(Y_test, test_predictions)
