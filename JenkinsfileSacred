@@ -1,0 +1,44 @@
+pipeline {
+    agent {
+        dockerfile true
+    }
+
+    parameters{
+        buildSelector(
+            defaultSelector: lastSuccessful(),
+            description: 'Which build to use for copying artifacts',
+            name: 'BUILD_SELECTOR'
+        )
+    }
+
+    triggers {
+        upstream(upstreamProjects: 'z-s495719-create-dataset', threshold: hudson.model.Result.SUCCESS)
+    }
+
+    stages {
+        stage('Git') {
+            steps {
+                git(
+                    url: "https://git.wmi.amu.edu.pl/s495719/ium_495719.git",
+                    branch: "main"
+                )
+            }
+        }
+        stage('CopyArtifacts') {
+            steps {
+                copyArtifacts fingerprintArtifacts: true, projectName: 'z-s495719-create-dataset', selector: buildParameter('BUILD_SELECTOR')
+            }
+        }
+        stage('Script') {
+            steps {
+                sh 'chmod 777 sacred/create_model.py'
+                sh "python3 sacred/create_model.py"
+            }
+        }
+        stage('CreateArtifacts') {
+            steps {
+                archiveArtifacts artifacts: 'sacred/hp_model.h5'
+            }
+        }
+    }
+}
